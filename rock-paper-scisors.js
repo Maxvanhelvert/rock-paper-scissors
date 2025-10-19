@@ -9,31 +9,63 @@ function getComputerChoice(number) {
     }
 }
 
-let computerChoice = getComputerChoice(Math.random());
-
-let humanChoice = prompt("Choose: rock, paper or scissors");
-
-let humanScore = 0;
-let computerScore = 0;
-
 function playRound(human, computer) {
     if (human === computer) {
-        return "it's a tie. You both chose " + human
+       return undefined
     } else if (human === "rock" && computer === "paper") {
-        return "You lost... The computer chose " + computer
+       return false
     } else if (human === "rock" && computer === "scissors") {
-        return "You win! The computer chose " + computer
+        return true
     } else if (human === "paper" && computer === "scissors") {
-        return "You lost... The computer chose " + computer
+        return false
     } else if (human === "paper" && computer === "rock") {
-        return "You win! The computer chose " + computer
+        return true
     } else if (human === "scissors" && computer === "rock") {
-        return "You lost... The computer chose " + computer
+       return false
     } else if (human === "scissors" && computer === "paper") {
-        return "You win! The computer chose " + computer
+       return true
     }
 }
 
-let result = playRound(humanChoice, computerChoice)
+function playGame() {
+    let humanScore = 0;
+    let computerScore = 0;
 
-console.log(result)
+    
+    for (let i = 0; i < 5; i++) {
+        const computerChoice = getComputerChoice(Math.random());
+
+        const humanChoice = prompt("Choose: rock, paper or scissors").toLowerCase();
+
+        let round = playRound(humanChoice, computerChoice)
+        if (round === true) {
+            console.log("You won!")
+            humanScore++
+        } else if (round === false) {
+            console.log("You lost...")
+            computerScore++
+        } else {
+            console.log("it's a tie.")
+        }
+    }
+
+    function gameEnding(humanScore, computerScore) {
+        let results = ""
+
+        if (humanScore === computerScore) {
+            return results = "It's a Tie in the end. \nYour score = " + humanScore + "\nThe computer score = " + computerScore
+        } else if (humanScore > computerScore) {
+            return results = "You won the game! \nYour score = " + humanScore + "\nThe computer score = " + computerScore
+        } else {
+            return results = "You lost the game... \nYour score = " + humanScore + "\nThe computer score = " + computerScore
+        }
+    }
+
+    let ending = gameEnding(humanScore, computerScore)
+
+    return ending
+}
+
+let game = playGame()
+
+console.log(game)
