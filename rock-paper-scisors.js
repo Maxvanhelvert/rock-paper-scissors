@@ -1,3 +1,10 @@
+/*
+Button to start a 5 round game (func playGame())
+Within that, three buttons that start a single round and feed in the player choice. 
+A round counter that gets triggered by the end of a round if it is at 5.
+Then func gameEnding that will display player and computer scores. 
+*/
+
 
 function getComputerChoice(number) {
     if (number < 0.3) {
