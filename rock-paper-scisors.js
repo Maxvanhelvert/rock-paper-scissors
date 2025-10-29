@@ -26,62 +26,26 @@ function gameEnding(humanScore, computerScore) {
   let finalResults = "";
 
   if (humanScore === computerScore) {
-    return (finalResults =
+    finalResults =
       "It's a Tie in the end. \nYour score = " +
       humanScore +
       "\nThe computer score = " +
-      computerScore);
+      computerScore;
   } else if (humanScore > computerScore) {
-    return (finalResults =
+    finalResults =
       "You won the game! \nYour score = " +
       humanScore +
       "\nThe computer score = " +
-      computerScore);
+      computerScore;
   } else {
-    return (finalResults =
+    finalResults =
       "You lost the game... \nYour score = " +
       humanScore +
       "\nThe computer score = " +
-      computerScore);
+      computerScore;
   }
 
   resultText.innerHTML = `<h3> ${finalResults}, Start a New game</h3>`;
-}
-
-function playRound(human, computer) {
-  let gameResult = undefined;
-
-  if (human === computer) {
-    resultText.innerHTML =
-      "<h3>You and the computer made the same choice. \nIt's a tie.</h3>";
-    gameResult = undefined;
-  } else if (human === "rock" && computer === "paper") {
-    resultText.innerHTML =
-      "<h3>You chose rock. Computer chose paper. \nYou lost...</h3>";
-    gameResult = false;
-  } else if (human === "rock" && computer === "scissors") {
-    resultText.innerHTML =
-      "<h3>You chose rock. Computer chose scissors. \nYou won!</h3>";
-    gameResult = true;
-  } else if (human === "paper" && computer === "scissors") {
-    resultText.innerHTML =
-      "<h3>You chose paper. Computer chose scissors. \nYou lost...</h3>";
-    gameResult = false;
-  } else if (human === "paper" && computer === "rock") {
-    resultText.innerHTML =
-      "<h3>You chose paper. Computer chose rock. \nYou won!</h3>";
-    gameResult = true;
-  } else if (human === "scissors" && computer === "rock") {
-    resultText.innerHTML =
-      "<h3>You chose scissors. Computer chose rock. \nYou lost...</h3>";
-    gameResult = false;
-  } else if (human === "scissors" && computer === "paper") {
-    resultText.innerHTML =
-      "<h3>You chose scissors. Computer chose paper. \nYou won!</h3>";
-    gameResult = true;
-  }
-
-  return gameResult;
 }
 
 function playGame() {
@@ -90,24 +54,55 @@ function playGame() {
   let computerScore = 0;
 
   rockBtn.addEventListener("click", () => {
-    playRound("rock", getComputerChoice(Math.random()))
-      ? humanScore++
-      : computerScore++;
+    playRound("rock", getComputerChoice(Math.random()));
   });
 
   paperBtn.addEventListener("click", () => {
-    playRound("paper", getComputerChoice(Math.random()))
-      ? humanScore++
-      : computerScore++;
+    playRound("paper", getComputerChoice(Math.random()));
   });
 
   scissorsBtn.addEventListener("click", () => {
-    playRound("scissors", getComputerChoice(Math.random()))
-      ? humanScore++
-      : computerScore++;
+    playRound("scissors", getComputerChoice(Math.random()));
   });
 
-  if (humanScore === 5 || computerScore === 5) {
-    gameEnding(humanScore, computerScore);
-  }
-}
+  //play round function working correctly.
+  function playRound(human, computer) {
+    if (human === computer) {
+      resultText.innerHTML =
+        "<h3>You and the computer made the same choice. \nIt's a tie.</h3>";
+    } else if (human === "rock" && computer === "paper") {
+      resultText.innerHTML =
+        "<h3>You chose rock. Computer chose paper. \nYou lost...</h3>";
+      computerScore++;
+    } else if (human === "rock" && computer === "scissors") {
+      resultText.innerHTML =
+        "<h3>You chose rock. Computer chose scissors. \nYou won!</h3>";
+      humanScore++;
+    } else if (human === "paper" && computer === "scissors") {
+      resultText.innerHTML =
+        "<h3>You chose paper. Computer chose scissors. \nYou lost...</h3>";
+      computerScore++;
+    } else if (human === "paper" && computer === "rock") {
+      resultText.innerHTML =
+        "<h3>You chose paper. Computer chose rock. \nYou won!</h3>";
+      humanScore++;
+    } else if (human === "scissors" && computer === "rock") {
+      resultText.innerHTML =
+        "<h3>You chose scissors. Computer chose rock. \nYou lost...</h3>";
+      computerScore++;
+    } else if (human === "scissors" && computer === "paper") {
+      resultText.innerHTML =
+        "<h3>You chose scissors. Computer chose paper. \nYou won!</h3>";
+      humanScore++;
+    }
+
+    document.getElementById(
+      "computer"
+    ).innerHTML = `Computer: ${computerScore}`;
+    document.getElementById("human").innerHTML = `Human: ${humanScore}`;
+
+    if (humanScore === 5 || computerScore === 5) {
+      gameEnding(humanScore, computerScore);
+    };
+  };
+};
