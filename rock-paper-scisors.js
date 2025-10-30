@@ -96,13 +96,15 @@ function playGame() {
       humanScore++;
     }
 
-    document.getElementById(
-      "computer"
-    ).innerHTML = `Computer: ${computerScore}`;
+    document.getElementById("computer").innerHTML = `Computer: ${computerScore}`;
     document.getElementById("human").innerHTML = `Human: ${humanScore}`;
 
     if (humanScore === 5 || computerScore === 5) {
       gameEnding(humanScore, computerScore);
-    };
-  };
-};
+      humanScore = 0;
+      computerScore = 0;
+      document.getElementById("computer").innerHTML = `Computer: ${computerScore}`;
+      document.getElementById("human").innerHTML = `Human: ${humanScore}`;
+    }
+  }
+}
